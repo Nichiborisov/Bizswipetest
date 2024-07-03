@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bizswipe</h1>
+        <nav>
+            <ul>
+                <li><a href="/auth/logout">Выйти</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="profile-info">
+            <% if (user.profile_picture) { %>
+                <img src="data:image/png;base64,<%= user.profile_picture %>" alt="Profile Picture">
+            <% } else { %>
+                <img src="/images/default-profile.png" alt="Profile Picture">
+            <% } %>
+            <p>Электронная почта: <%= user.email %></p>
+            <form action="/profile/update" method="post" enctype="multipart/form-data">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" value="<%= user.name %>">
+
+                <label for="profile_picture">Фотография профиля:</label>
+                <input type="file" id="profile_picture" name="profile_picture">
+
+                <label for="blog">Лента блога:</label>
+                <textarea id="blog" name="blog"><%= user.blog %></textarea>
+
+                <label for="vk_link">Ссылка на ВК:</label>
+                <input type="text" id="vk_link" name="vk_link" value="<%= user.vk_link %>">
+
+                <label for="telegram_link">Ссылка на Telegram:</label>
+                <input type="text" id="telegram_link" name="telegram_link" value="<%= user.telegram_link %>">
+
+                <label for="website_link">Ссылка на сторонний сайт:</label>
+                <input type="text" id="website_link" name="website_link" value="<%= user.website_link %>">
+
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
